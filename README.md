@@ -12,8 +12,8 @@ This cookbook sets up a Cayley instance through the Chef automation platform.
 ## Supported Backends
 
 * Memory
+* MongoDB
 * LevelDB (Coming soon!)
-* MongoDB (Coming soon!)
 
 
 ## Attributes
@@ -34,7 +34,7 @@ This cookbook sets up a Cayley instance through the Chef automation platform.
   <tr>
     <td><tt>['cayley']['backend']</tt></td>
     <td>String</td>
-    <td>Determines the type of the underlying database.</td>
+    <td>Determines the type of the underlying database. (`mem`|`leveldb`|`mongodb`)</td>
     <td><tt>mem</tt></td>
   </tr>
   <tr>
@@ -70,7 +70,8 @@ This cookbook sets up a Cayley instance through the Chef automation platform.
   <tr>
     <td><tt>['cayley']['db_path']</tt></td>
     <td>String</td>
-    <td>Where the database actually lives.</td>
+    <td>Where the database actually lives. For `mem`, file location of initial data set. For `mongodb`,
+    hostname and port.</td>
     <td><tt>/tmp/testdb</tt></td>
   </tr>
 </table>
