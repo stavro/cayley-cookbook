@@ -1,0 +1,32 @@
+{
+  "name": "cayley",
+  "description": "Installs and configures Cayley graph database",
+  "long_description": "",
+  "maintainer": "Sean Stavropoulos",
+  "maintainer_email": "sean.stavro@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "amazon": ">= 0.0.0"
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "cayley::setup": "Installs and configures a single Cayley instance"
+  },
+  "version": "0.0.1"
+}

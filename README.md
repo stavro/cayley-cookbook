@@ -9,6 +9,13 @@ This cookbook sets up a Cayley instance through the Chef automation platform.
 * Ubuntu 14.04 LTS
 * Amazon
 
+## Supported Backends
+
+* Memory
+* LevelDB (Coming soon!)
+* MongoDB (Coming soon!)
+
+
 ## Attributes
 
 <table>
