@@ -1,0 +1,12 @@
+/*.gem
+/.bundle
+/pkg/*
+/tmp
+/vendor
+
+Berksfile.lock
+Gemfile.lock
+
+/bin/*
+!/bin/librarian-chef
+.DS_Store

@@ -1,0 +1,86 @@
+#!/bin/sh
+### BEGIN REDHAT INFO
+# chkconfig: 2345 99 20
+# description: The Cayley server. See https://github.com/google/cayley
+### END REDHAT INFO
+### BEGIN INIT INFO
+# Provides:          cayley
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+### END INIT INFO
+
+# Init script for Cayley so it automatically starts/stops with the machine.
+# You have to SET the Cayley installation directory here:
+
+CAYLEY_DIR="<%= node.cayley.directory%>"
+CAYLEY_LOG_DIR="<%= node.cayley.log_directory %>"
+
+# Specify the user to run Cayley as:
+CAYLEY_USER="root"
+
+usage() {
+    echo "Usage: `basename $0`: <start|stop|status>"
+    exit 1
+}
+
+start() {
+    status
+    if [ "$PID" != "0" ]
+    then
+        echo "Cayley server has already been started. PID: $PID"
+        return $PID
+    fi
+    echo "Starting Cayley server..."
+    su -c "cd \"$CAYLEY_DIR\"; /usr/bin/nohup ./cayley http --config=cayley.cfg 1>$CAYLEY_LOG_DIR/cayley.out 2>$CAYLEY_LOG_DIR/cayley.err &" $CAYLEY_USER
+}
+
+stop() {
+    status
+    if [ "$PID" = "0" ]
+    then
+        echo "Cayley server has already been stopped."
+        return 0
+    fi
+    echo "Stopping Cayley server..."
+    su -c "kill $PID" $CAYLEY_USER
+}
+
+status() {
+    PID=`ps -ef | grep "cayley http" | grep -v grep | awk '{print $2}'`
+    if [ "x$PID" = "x" ]
+    then
+        PID=0
+    fi
+
+    # if PID is greater than 0 then Cayley is running, else it is not
+    # return $PID
+}
+
+if [ "x$1" = "xstart" ]
+then
+    start
+    exit 0
+fi
+
+if [ "x$1" = "xstop" ]
+then
+    stop
+    exit 0
+fi
+
+if [ "x$1" = "xstatus" ]
+then
+    status
+    if [ "$PID" != "0" ]
+    then
+        echo "Cayley server is running with PID: $PID"
+    exit 0
+    else
+        echo "Cayley server is NOT running"
+    exit 1
+    fi
+fi
+
+usage
