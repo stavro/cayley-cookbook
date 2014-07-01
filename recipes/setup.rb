@@ -11,16 +11,12 @@
 # 1. Create Directories
 #
 
-directory node.cayley.directory do
-  recursive true
-  owner 'root'
-  action :create
-end
-
-directory node.cayley.log_directory do
-  recursive true
-  owner 'root'
-  action :create
+[:directory, :log_dir].each do |dir|
+  directory node.cayley[dir] do
+    recursive true
+    owner 'root'
+    action :create
+  end
 end
 
 #

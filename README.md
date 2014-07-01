@@ -62,7 +62,7 @@ This cookbook sets up a Cayley instance through the Chef automation platform.
     <td><tt>false</tt></td>
   </tr>
   <tr>
-    <td><tt>['cayley']['log_directory']</tt></td>
+    <td><tt>['cayley']['log_dir']</tt></td>
     <td>String</td>
     <td>Location to store runtime and error log messages.</td>
     <td><tt>/var/log/cayley</tt></td>
