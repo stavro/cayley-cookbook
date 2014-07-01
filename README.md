@@ -90,6 +90,10 @@ Include `cayley` in your node's `run_list`:
 }
 ```
 
+Or for OpsWorks:
+
+![image](https://cloud.githubusercontent.com/assets/2391584/3450111/789d288a-0173-11e4-966f-9293236302f3.png)
+
 ## Contributing
 
 1. Fork the repository on Github
