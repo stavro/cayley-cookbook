@@ -18,63 +18,38 @@ This cookbook sets up a Cayley instance through the Chef automation platform.
 
 ## Attributes
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['version']</tt></td>
-    <td>String</td>
-    <td>Version of Cayley to manage</td>
-    <td><tt>0.3.0</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['backend']</tt></td>
-    <td>String</td>
-    <td>Determines the type of the underlying database. (`mem`|`leveldb`|`mongodb`)</td>
-    <td><tt>mem</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['directory']</tt></td>
-    <td>String</td>
-    <td>Directory for Cayley to be installed</td>
-    <td><tt>/opt/cayley</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['listen_host']</tt></td>
-    <td>String</td>
-    <td>The hostname or IP address for Cayley's HTTP server to listen on.</td>
-    <td><tt>0.0.0.0</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['listen_port']</tt></td>
-    <td>String</td>
-    <td>The port for Cayley's HTTP server to listen on.</td>
-    <td><tt>64210</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['read_only']</tt></td>
-    <td>Boolean</td>
-    <td>If true, disables the ability to write to the database using the HTTP API.</td>
-    <td><tt>false</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['log_dir']</tt></td>
-    <td>String</td>
-    <td>Location to store runtime and error log messages.</td>
-    <td><tt>/var/log/cayley</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['cayley']['db_path']</tt></td>
-    <td>String</td>
-    <td>Where the database actually lives. For `mem`, file location of initial data set. For `mongodb`,
-    hostname and port.</td>
-    <td><tt>/tmp/testdb</tt></td>
-  </tr>
-</table>
+
+| Key                         | Type     | Default           | Description           |
+|:----------------------------|:---------|:------------------|:----------------------|
+| `node['cayley']['version']`     | String   | `0.3.0`           | Version of Cayley to manage. |
+| `node['cayley']['backend']`     | String   | `mem`             | Determines the type of the underlying database. (`mem`|`leveldb`|`mongodb`) |
+| `node['cayley']['directory']`   | String   | `/opt/cayley`     | Directory for Cayley to be installed |
+| `node['cayley']['listen_host']` | String   | `0.0.0.0`         | The hostname or IP address for Cayley's HTTP server to listen on. |
+| `node['cayley']['listen_port']` | String   | `64210`           | The port for Cayley's HTTP server to listen on. |
+| `node['cayley']['read_only']`   | Boolean  | `false`           | If true, disables the ability to write to the database using the HTTP API. |
+| `node['cayley']['log_dir']`     | String   | `/var/log/cayley` | Location to store runtime and error log messages. |
+| `node['cayley']['db_path']`     | String   | `/tmp/testdb`     | Where the database actually lives. For `mem`, file location of initial data set. For `mongodb`, hostname and port. |
+| `node['cayley']['db_options']`  | Object   | `{}`              | Per-Database Options. |
+
+### Per-Database Options
+
+#### Memory
+
+No special options.
+
+#### LevelDB
+
+| Key                                                | Type      | Default     | Description           |
+|:---------------------------------------------------|:----------|:------------|:----------------------|
+| `node['cayley']['db_options']['write_buffer_mb']`  | Integer   | `20`        | The size in MiB of the LevelDB write cache. Increasing this number allows for more/faster writes before syncing to disk. Default is 20, for large loads, a recommended value is 200+. |
+| `node['cayley']['db_options']['cache_size_mb']`    | Integer   | `2`         | The size in MiB of the LevelDB block cache. Increasing this number uses more memory to maintain a bigger cache of triple blocks for better performance. |
+
+#### MongoDB
+
+| Key                                              | Type     | Default           | Description           |
+|:-------------------------------------------------|:---------|:------------------|:----------------------|
+| `node['cayley']['db_options']['database_name']`  | String   | `cayley`          | The name of the database within MongoDB to connect to. Manages its own collections and indicies therein. |
+
 
 ## Usage
 

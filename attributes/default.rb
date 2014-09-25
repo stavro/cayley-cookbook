@@ -9,6 +9,7 @@ default[:cayley][:load_size]    = 10000
 default[:cayley][:backend]      = 'mem'
 default[:cayley][:log_dir]      = '/var/log/cayley'
 default[:cayley][:db_path]      = '/tmp/testdb'
+default[:cayley][:db_options]   = {}
 
 # Cayley archive
 

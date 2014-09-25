@@ -4,5 +4,6 @@
   "listen_host" : "<%= node.cayley.listen_host %>",
   "listen_port" : "<%= node.cayley.listen_port %>",
   "read_only" : <%= node.cayley.read_only %>,
-  "load_size" : <%= node.cayley.load_size %>
+  "load_size" : <%= node.cayley.load_size %>,
+  "db_options" : <%= node.cayley.db_options.to_json %>
 }
